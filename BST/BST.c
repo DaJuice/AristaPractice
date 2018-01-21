@@ -38,21 +38,21 @@ Node* find_max(Node* node) {
 }
 
 // Helper function to do an inorder traversal of the binary tree
-void inorder(struct node* root){
-  if(root != NULL){
-    inorder(root->left);
-    printf("%d \n", root->data);
-    inorder(root->right);
+void inorder(Node* node){
+  if(node != NULL){
+    inorder(node->left);
+    printf("%d \n", node->data);
+    inorder(node->right);
   }
 }
 
 Node* insert_node(Node* node, int data) {
   if(node == NULL) { return create_node(data); }
   if(data < node->data){
-    node->data = insert_node(node->left, data);
+    node->left = insert_node(node->left, data);
   }
   else if(data > node->data){
-    node->data = insert_node(node->right, data);
+    node->right = insert_node(node->right, data);
   }
   return node;
 }
@@ -60,7 +60,7 @@ Node* insert_node(Node* node, int data) {
 Node* delete_node(Node* node, int data) {
   if(node == NULL){
     fprintf(stderr, "ERR: Can't delete from an empty tree");
-    return root;
+    return node;
   }
 
   // If key is less, go into the left subtree
@@ -103,13 +103,13 @@ int main() {
       /  \    /  \
     20   40  60   80 */
   struct node *root = NULL;
-  root = insert(root, 50);
-  root = insert(root, 30);
-  root = insert(root, 20);
-  root = insert(root, 40);
-  root = insert(root, 70);
-  root = insert(root, 60);
-  root = insert(root, 80);
+  root = insert_node(root, 50);
+  root = insert_node(root, 30);
+  root = insert_node(root, 20);
+  root = insert_node(root, 40);
+  root = insert_node(root, 70);
+  root = insert_node(root, 60);
+  root = insert_node(root, 80);
 
   printf("Inorder traversal of the given tree \n");
   inorder(root);
